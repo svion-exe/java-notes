@@ -410,6 +410,21 @@ def check_dry(t, sec, blk, codes, prev_code):
         t.err(blk.line_no, f"dry has {len(steps)} steps; use 6-14")
     elif not 6 <= len(steps) <= 14:
         t.warn(blk.line_no, f"dry has {len(steps)} steps; 6-14 is the target")
+    if code_lines is None and getattr(prev_code, "out", None):
+        want = [l.rstrip() for l in prev_code.out.split("\n")]
+        got = []
+        for _, s in steps:
+            f = [x.strip() for x in s.split("|")]
+            if len(f) == 4 and f[3]:
+                got.append(f[3])
+        k = 0
+        for g in got:
+            while k < len(want) and want[k] != g:
+                k += 1
+            if k == len(want):
+                t.warn(blk.line_no, f"dry console line {g!r} does not match the snippet output in order")
+                break
+            k += 1
     for _, s in steps:
         f = [x.strip() for x in s.split("|")]
         if len(f) < 2 or len(f) > 4:

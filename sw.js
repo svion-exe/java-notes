@@ -1,6 +1,6 @@
 /* Keeps the app working with no internet. Network first, so new notes arrive when you are online.
    Progress is not stored here; it lives in the page's own storage. */
-const CACHE = 'java-notes-v1';
+const CACHE = 'java-notes-v2';
 const SHELL = ['./', 'index.html', 'style.css', 'js/parse.js', 'js/render.js', 'js/app.js',
   'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png', 'apple-touch-icon.png', 'content/topics.json'];
 
