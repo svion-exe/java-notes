@@ -1,3 +1,4 @@
 drafts/
 tools/.verify-cache.json
 .DS_Store
+__pycache__/
